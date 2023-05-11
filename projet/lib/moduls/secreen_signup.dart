@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:fitness/shared/components/componentsKhalida.dart';
 
-import '../../shared/components/components.dart';
-
-class loginView extends StatefulWidget {
-  const loginView({Key? key}) : super(key: key);
+class signupView extends StatefulWidget {
+  const signupView({Key? key}) : super(key: key);
 
   @override
-  State<loginView> createState() => _loginViewState();
+  State<signupView> createState() => _signupViewState();
 }
 
-class _loginViewState extends State<loginView> {
+class _signupViewState extends State<signupView> {
   var visable = const Icon(
     Icons.visibility,
     color: Color(0xff4c5166),
@@ -25,36 +24,40 @@ class _loginViewState extends State<loginView> {
       home: Scaffold(
         body: SingleChildScrollView(
           child: Container(
+            //width: 400,
+            //height: 810,
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("images/Splash.png"), fit: BoxFit.cover)),
+                    image: AssetImage("images/back.png"), fit: BoxFit.cover)),
             child: Padding(
               padding: const EdgeInsets.only(left: 8, right: 7.5),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 32),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      defaultButton(
+                          size: 14,
+                          right: () {},
+                          text: 'Sign up',
+                          isapper: false,
+                          width: 88,
+                          rad: 21),
+                      const SizedBox(width: 20),
                       const Text(
-                        "Sign up    ",
+                        "Login    ",
                         style: TextStyle(
                             fontSize: 16,
                             color: Colors.black,
                             fontWeight: FontWeight.w600),
                       ),
-                      defaultButton(
-                          size: 14,
-                          right: () {},
-                          text: 'Login',
-                          isapper: false,
-                          width: 88,
-                          rad: 21)
                     ],
                   ),
                   const SizedBox(height: 50),
                   const Text(
-                    "Login",
+                    "Sign up",
                     style: TextStyle(
                       fontSize: 34,
                       fontWeight: FontWeight.w900,
@@ -64,7 +67,7 @@ class _loginViewState extends State<loginView> {
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    " Welcome back! ",
+                    " To join the GetFit community ",
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w800,
@@ -72,13 +75,27 @@ class _loginViewState extends State<loginView> {
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 100),
+                  const SizedBox(height: 30),
                   Field(
-                    text: '   E-mail',
+                    text: '   Enter your full name',
+                    keyboardType: TextInputType.name,
                   ),
-                  const SizedBox(height: 20),
-                  Field(text: '    pasword'),
-                  const SizedBox(height: 35),
+                  const SizedBox(height: 15),
+                  Field(
+                    text: '    Enter an E-mail',
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  const SizedBox(height: 15),
+                  Field(
+                    text: '   Enter a password ',
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                  const SizedBox(height: 15),
+                  Field(
+                    text: '    confirm the password',
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                  const SizedBox(height: 25),
                   defaultButton(
                       hight: 52.1,
                       background: const Color(0xffd0fd3e),
@@ -86,27 +103,8 @@ class _loginViewState extends State<loginView> {
                       isapper: false,
                       size: 15,
                       right: () {},
-                      text: 'Login'),
+                      text: 'Sign in'),
                   const SizedBox(height: 8),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text("    remeber me",
-                          style: TextStyle(color: Colors.white)),
-                      TextButton(
-                        onPressed: () {
-                          // Forgot password button pressed
-                        },
-                        child: const Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            fontSize: 11.5,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                   const Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Center(
@@ -138,7 +136,7 @@ class _loginViewState extends State<loginView> {
                     ),
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   const Text(
                     "Sign  in  with ",
@@ -148,19 +146,19 @@ class _loginViewState extends State<loginView> {
                         color: Colors.white),
                   ),
                   const SizedBox(
-                    height: 25,
+                    height: 30,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset("images/google.png"),
+                      Image.asset("images/gog.png"),
                       const SizedBox(width: 30),
                       Image.asset("images/apple.png"),
                       const SizedBox(width: 30),
                       Image.asset("images/fb.png"),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     // ignore: prefer_const_literals_to_create_immutables
@@ -178,7 +176,8 @@ class _loginViewState extends State<loginView> {
                                 color: Color(0xffd0fd3e), fontSize: 13.5),
                           ))
                     ],
-                  )
+                  ),
+                  const SizedBox(height: 55),
                 ],
               ),
             ),

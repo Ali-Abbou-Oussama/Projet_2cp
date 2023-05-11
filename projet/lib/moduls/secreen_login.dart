@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../shared/components/components.dart';
+import 'package:fitness/shared/components/componentsKhalida.dart';
 
 class loginView extends StatefulWidget {
   const loginView({Key? key}) : super(key: key);
@@ -27,7 +26,7 @@ class _loginViewState extends State<loginView> {
           child: Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("images/Splash.png"), fit: BoxFit.cover)),
+                    image: AssetImage("images/back.png"), fit: BoxFit.cover)),
             child: Padding(
               padding: const EdgeInsets.only(left: 8, right: 7.5),
               child: Column(
@@ -75,9 +74,13 @@ class _loginViewState extends State<loginView> {
                   const SizedBox(height: 100),
                   Field(
                     text: '   E-mail',
+                    keyboardType: TextInputType.emailAddress,
                   ),
                   const SizedBox(height: 20),
-                  Field(text: '    pasword'),
+                  Field(
+                    text: '    pasword',
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
                   const SizedBox(height: 35),
                   defaultButton(
                       hight: 52.1,
@@ -153,7 +156,7 @@ class _loginViewState extends State<loginView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset("images/google.png"),
+                      Image.asset("images/gog.png"),
                       const SizedBox(width: 30),
                       Image.asset("images/apple.png"),
                       const SizedBox(width: 30),

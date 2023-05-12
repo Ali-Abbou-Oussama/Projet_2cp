@@ -43,7 +43,6 @@ class _passwordViewState extends State<passwordView> {
                   child: const Icon(
                     Icons.arrow_back_ios,
                     color: Color(0xffffffff),
-                    weight: 2,
                   ),
                 ),
               ),

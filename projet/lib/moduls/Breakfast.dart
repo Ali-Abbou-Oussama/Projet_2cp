@@ -71,7 +71,6 @@ class _BreakfastState extends State<Breakfast> {
                         child: const Icon(
                           Icons.arrow_back_ios,
                           color: Color(0xffffffff),
-                          weight: 2,
                         ),
                         onTap: () {
                           Navigator.push(

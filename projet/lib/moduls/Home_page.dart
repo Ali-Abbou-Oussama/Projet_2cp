@@ -117,10 +117,10 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       children: [
                         Column(
-                          children: [
+                          children: const [
                             Text(
                               'Macro Balance',
                               style: TextStyle(
@@ -141,8 +141,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        SizedBox(width: 130),
-                        Text(
+                        const SizedBox(width: 130),
+                        const Text(
                           'Diet goal',
                           style: TextStyle(
                             color: Colors.white,
@@ -261,8 +261,8 @@ class _HomePageState extends State<HomePage> {
                     Center(
                       child: LineChartWidget(),
                     ),
-                    const Row(
-                      children: [
+                    Row(
+                      children: const [
                         SizedBox(width: 210),
                         Text(
                           'Log weight',

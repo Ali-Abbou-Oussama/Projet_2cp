@@ -22,8 +22,11 @@ dependencies:
   charts_flutter: ^0.12.0
   cupertino_icons: ^1.0.2
   fl_chart: ^0.60.0
-  provider:
-  
+  numberpicker: ^2.1.1
+  vertical_weight_slider: ^2.5.0
+  page_view_indicators: ^2.0.0
+  bloc: ^8.1.1
+  flutter_bloc: ^8.1.1
   
 
 dev_dependencies:

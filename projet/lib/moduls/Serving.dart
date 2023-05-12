@@ -57,8 +57,8 @@ class _ServingState extends State<Serving> {
                             ),
                           ),
                         ),
-                        const Row(
-                          children: [
+                        Row(
+                          children: const [
                             Text(
                               '  Serving size ',
                               style: TextStyle(
@@ -88,8 +88,8 @@ class _ServingState extends State<Serving> {
                         const SizedBox(
                           height: 10,
                         ),
-                        const Row(
-                          children: [
+                        Row(
+                          children: const [
                             SizedBox(
                               width: 100,
                             ),

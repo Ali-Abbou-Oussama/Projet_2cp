@@ -258,8 +258,8 @@ class _homeviewState extends State<homeview> {
                       ],
                     ),
                     const SizedBox(height: 30),
-                    const Column(
-                      children: [
+                    Column(
+                      children: const [
                         ListTile(
                           title: Text(
                             'Breakfast',

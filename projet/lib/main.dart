@@ -1,4 +1,5 @@
-import 'package:fitness/moduls/Breakfast.dart';
+import 'package:fitness/moduls/Authentification%201/gender.dart';
+import 'package:fitness/moduls/login.dart';
 import 'package:fitness/moduls/login/login_screen.dart';
 import 'package:fitness/moduls/secreen_home.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: loginView(),
+      home: loginView1(),
     );
   }
 }

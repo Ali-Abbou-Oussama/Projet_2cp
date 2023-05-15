@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, must_be_immutable
 
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -7,7 +7,6 @@ class MYstatic extends StatelessWidget {
   late List<SalesData> _ChartData;
 
   MYstatic({Key? key}) : super(key: key);
-  @override
   void initState() {
     _ChartData = getChartData();
   }

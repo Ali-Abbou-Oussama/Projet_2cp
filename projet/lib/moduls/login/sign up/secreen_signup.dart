@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:fitness/moduls/login/login/login_screen.dart';
 import 'package:fitness/moduls/login/sign%20up/cubit/cubit.dart';
 import 'package:fitness/moduls/login/sign%20up/cubit/states.dart';
@@ -8,6 +10,8 @@ import '../../../../shared/components/components.dart';
 import '../authentification/Authentification 1/gender.dart';
 
 class signupView extends StatefulWidget {
+  const signupView({Key? key}) : super(key: key);
+
   @override
   State<signupView> createState() => _signupViewState();
 }
@@ -80,7 +84,8 @@ class _signupViewState extends State<signupView> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => loginView1()));
+                                          builder: (context) =>
+                                              const loginView1()));
                                 },
                                 text: 'Login',
                                 isapper: false,
@@ -178,7 +183,7 @@ class _signupViewState extends State<signupView> {
                                   },
                                 ),
                                 border: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors
                                         .black, // Change border color here
                                   ),
@@ -186,7 +191,7 @@ class _signupViewState extends State<signupView> {
                                       25), // Match container border radius here
                                 ),
                                 labelText: '    password',
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                   color: Colors.black,
                                 ),
                               ),
@@ -244,7 +249,7 @@ class _signupViewState extends State<signupView> {
                               },
                               text: 'Sign in'),
                           const SizedBox(height: 8),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Center(
                               child: Row(
@@ -312,7 +317,7 @@ class _signupViewState extends State<signupView> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                loginView1()));
+                                                const loginView1()));
                                   }), //navigation to register screen////////////////////////////////////////////////
                                   child: const Text(
                                     "Login",

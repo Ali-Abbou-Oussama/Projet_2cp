@@ -1,23 +1,26 @@
+// ignore_for_file: camel_case_types
+
 import 'package:fitness/moduls/login/cubit/cubit.dart';
 import 'package:fitness/moduls/login/cubit/states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../shared/components/components.dart';
 import '../sign up/secreen_signup.dart';
 
 class loginView1 extends StatefulWidget {
+  const loginView1({Key? key}) : super(key: key);
+
   @override
   State<loginView1> createState() => _loginViewState();
 }
 
 class _loginViewState extends State<loginView1> {
-  var visable = Icon(
+  var visable = const Icon(
     Icons.visibility,
     color: Color(0xff4c5166),
   );
-  var visableoff = Icon(
+  var visableoff = const Icon(
     Icons.visibility_off,
     color: Color(0xff4c5166),
   );
@@ -55,7 +58,7 @@ class _loginViewState extends State<loginView1> {
                 body: Center(
                   child: SingleChildScrollView(
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage("images/Splash.png"),
                               fit: BoxFit.cover)),
@@ -66,7 +69,7 @@ class _loginViewState extends State<loginView1> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 32,
                               ),
                               Row(
@@ -79,14 +82,14 @@ class _loginViewState extends State<loginView1> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    signupView()));
+                                                    const signupView()));
                                       },
                                       text: 'Sign Up',
                                       isapper: false,
                                       width: 88,
                                       rad: 21,
                                       background: Colors.transparent),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
                                   // Text(
@@ -105,8 +108,8 @@ class _loginViewState extends State<loginView1> {
                                       rad: 21)
                                 ],
                               ),
-                              SizedBox(height: 50),
-                              Text(
+                              const SizedBox(height: 50),
+                              const Text(
                                 "Login",
                                 style: TextStyle(
                                   fontSize: 34,
@@ -115,8 +118,8 @@ class _loginViewState extends State<loginView1> {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(height: 10),
-                              Text(
+                              const SizedBox(height: 10),
+                              const Text(
                                 " Welcome back! ",
                                 style: TextStyle(
                                   fontSize: 12,
@@ -125,7 +128,7 @@ class _loginViewState extends State<loginView1> {
                                   color: Colors.white,
                                 ),
                               ),
-                              SizedBox(height: 100),
+                              const SizedBox(height: 100),
                               Field(
                                 controller: emailcontroller,
                                 type: TextInputType.emailAddress,
@@ -142,7 +145,7 @@ class _loginViewState extends State<loginView1> {
                                 },
                                 text: '   E-mail',
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Container(
                                 width: 370.5,
                                 height: 52.9,
@@ -174,7 +177,7 @@ class _loginViewState extends State<loginView1> {
                                       },
                                     ),
                                     border: OutlineInputBorder(
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors
                                             .black, // Change border color here
                                       ),
@@ -182,7 +185,7 @@ class _loginViewState extends State<loginView1> {
                                           25), // Match container border radius here
                                     ),
                                     labelText: '    password',
-                                    hintStyle: TextStyle(
+                                    hintStyle: const TextStyle(
                                       color: Colors.black,
                                     ),
                                   ),
@@ -208,10 +211,10 @@ class _loginViewState extends State<loginView1> {
                               //       return null;
                               //     },
                               //     text: '    pasword'),
-                              SizedBox(height: 35),
+                              const SizedBox(height: 35),
                               defaultButton(
                                   hight: 52.1,
-                                  background: Color(0xffd0fd3e),
+                                  background: const Color(0xffd0fd3e),
                                   rad: 21,
                                   isapper: false,
                                   size: 15,
@@ -223,18 +226,18 @@ class _loginViewState extends State<loginView1> {
                                     }
                                   }),
                                   text: 'Login'),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("    remeber me",
+                                  const Text("    remeber me",
                                       style: TextStyle(color: Colors.white)),
                                   TextButton(
                                     onPressed: () {
                                       // Forgot password button pressed
                                     },
-                                    child: Text(
+                                    child: const Text(
                                       'Forgot Password?',
                                       style: TextStyle(
                                         fontSize: 11.5,
@@ -244,8 +247,8 @@ class _loginViewState extends State<loginView1> {
                                   ),
                                 ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
                                 child: Center(
                                   child: Row(
                                     children: [
@@ -274,35 +277,35 @@ class _loginViewState extends State<loginView1> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 30,
                               ),
-                              Text(
+                              const Text(
                                 "Sign  in  with ",
                                 style: TextStyle(
                                     fontSize: 19.2,
                                     fontWeight: FontWeight.w900,
                                     color: Colors.white),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 25,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Image.asset("images/google.png"),
-                                  SizedBox(width: 30),
+                                  const SizedBox(width: 30),
                                   Image.asset("images/apple.png"),
-                                  SizedBox(width: 30),
+                                  const SizedBox(width: 30),
                                   Image.asset("images/fb.png"),
                                 ],
                               ),
-                              SizedBox(height: 15),
+                              const SizedBox(height: 15),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 // ignore: prefer_const_literals_to_create_immutables
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Don't have an account ?",
                                     style: TextStyle(color: Color(0xffcfd7db)),
                                   ),
@@ -312,9 +315,9 @@ class _loginViewState extends State<loginView1> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    signupView()));
+                                                    const signupView()));
                                       }), //navigation to register screen////////////////////////////////////////////////
-                                      child: Text(
+                                      child: const Text(
                                         "Sing Up",
                                         style: TextStyle(
                                             color: Color(0xffd0fd3e),

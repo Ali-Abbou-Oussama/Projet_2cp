@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class Serving extends StatefulWidget {
@@ -30,10 +32,10 @@ class _ServingState extends State<Serving> {
                         borderRadius: BorderRadius.circular(8)),
                     width: 350,
                     height: 150,
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Add Serving',
                           style: TextStyle(
                             color: Colors.white,
@@ -43,22 +45,20 @@ class _ServingState extends State<Serving> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        Container(
-                          child: const TextField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                              ),
-                              hintText: '   Serving name      ',
-                              hintStyle: TextStyle(
-                                color: Colors.white,
-                                decoration: TextDecoration.underline,
-                              ),
+                        TextField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                            ),
+                            hintText: '   Serving name      ',
+                            hintStyle: TextStyle(
+                              color: Colors.white,
+                              decoration: TextDecoration.underline,
                             ),
                           ),
                         ),
                         Row(
-                          children: const [
+                          children: [
                             Text(
                               '  Serving size ',
                               style: TextStyle(
@@ -85,11 +85,11 @@ class _ServingState extends State<Serving> {
                             ),
                           ],
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 10,
                         ),
                         Row(
-                          children: const [
+                          children: [
                             SizedBox(
                               width: 100,
                             ),

@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +10,7 @@ import '../../sign up/cubit/states.dart';
 
 class goal extends StatefulWidget {
   const goal({
+    Key? key,
     required this.weight,
     required this.height,
     required this.age,
@@ -15,7 +18,7 @@ class goal extends StatefulWidget {
     required this.ismale,
     required this.pasword,
     required this.username,
-  });
+  }) : super(key: key);
 
   final String email;
   final String pasword;

@@ -3,23 +3,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness/Khedma%20Abdou/Aliments.dart';
 import 'package:fitness/Khedma%20Abdou/AlimentsInfoWidget.dart';
-import 'package:fitness/Khedma%20Abdou/SearchScreenBreakfast.dart';
+import 'package:fitness/Khedma%20Abdou/SearchScreenDinner.dart';
 import 'package:fitness/moduls/meal.dart';
 import 'package:flutter/material.dart';
 
-class Breakfast extends StatefulWidget {
+class Dinner extends StatefulWidget {
   List<Aliments?>? listAliments;
   double caloriesConsumed;
-  Breakfast(
-      {Key? key, this.caloriesConsumed = 0.0, List<Aliments?>? listAliments})
+  Dinner({Key? key, this.caloriesConsumed = 0.0, List<Aliments?>? listAliments})
       : listAliments = listAliments ?? [],
         super(key: key);
 
   @override
-  State<Breakfast> createState() => _BreakfastState();
+  State<Dinner> createState() => _DinnerState();
 }
 
-class _BreakfastState extends State<Breakfast> {
+class _DinnerState extends State<Dinner> {
   bool _isVisible = false;
   bool _isTapped = false;
   Color _textColor1 = const Color(0xffD0FD3E);
@@ -41,7 +40,7 @@ class _BreakfastState extends State<Breakfast> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-          builder: (context) => SearchScreenBreakfast(
+          builder: (context) => SearchScreenDinner(
                 caloriesAlreadyConsumed: widget.caloriesConsumed,
                 listAliments: widget.listAliments,
               )),
@@ -112,7 +111,7 @@ class _BreakfastState extends State<Breakfast> {
                       width: 16,
                     ),
                     const Text(
-                      'Breakfast',
+                      'Dinner',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 24,

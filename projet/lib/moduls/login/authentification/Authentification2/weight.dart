@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
@@ -8,11 +10,13 @@ import '../authentification3/goal.dart';
 
 class Authentification2 extends StatefulWidget {
   const Authentification2(
-      {required this.ismale,
+      {Key? key,
+      required this.ismale,
       required this.age,
       required this.email,
       required this.pasword,
-      required this.username});
+      required this.username})
+      : super(key: key);
   final String email;
   final String pasword;
   final String username;

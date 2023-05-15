@@ -1,6 +1,4 @@
-import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness/moduls/login/cubit/states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

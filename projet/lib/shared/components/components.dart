@@ -1,6 +1,5 @@
-import 'dart:ffi';
+// ignore_for_file: non_constant_identifier_names, constant_identifier_names
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:numberpicker/numberpicker.dart';
@@ -19,9 +18,9 @@ Widget defaultButton(
         double rad = 0}) =>
     Container(
       decoration: BoxDecoration(
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
-                color: const Color(0x40000000),
+                color: Color(0x40000000),
                 offset: Offset(0, 4),
                 blurRadius: 4,
                 spreadRadius: 0)
@@ -65,7 +64,7 @@ Widget Field({
         controller: controller,
         decoration: InputDecoration(
             border: OutlineInputBorder(
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Colors.black, // Change border color here
               ),
               borderRadius: BorderRadius.circular(
@@ -102,7 +101,7 @@ Widget vertslider({
 }) =>
     Center(
       child: NumberPicker(
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
           decoration: TextDecoration.none,
           color: Colors.white38,
           fontWeight: FontWeight.w600,
@@ -110,7 +109,7 @@ Widget vertslider({
           fontStyle: FontStyle.normal,
           fontSize: 25.0,
         ),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             border: Border(
                 top: BorderSide(
                   color: Color(0x99d0fd3e),
@@ -118,9 +117,9 @@ Widget vertslider({
                 bottom: BorderSide(
                   color: Color(0x99d0fd3e),
                 ))),
-        selectedTextStyle: TextStyle(
+        selectedTextStyle: const TextStyle(
             decoration: TextDecoration.none,
-            color: const Color(0xffffffff),
+            color: Color(0xffffffff),
             fontWeight: FontWeight.w600,
             fontFamily: "OpenSans",
             fontStyle: FontStyle.normal,

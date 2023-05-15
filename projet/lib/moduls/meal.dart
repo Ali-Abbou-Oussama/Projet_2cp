@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, avoid_unnecessary_containers
+
 import 'package:fitness/moduls/Breakfast.dart';
 import 'package:fitness/moduls/Serving.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +45,7 @@ class _mealState extends State<meal> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const Breakfast()),
+                                  builder: (context) => Breakfast()),
                             );
                           },
                           color: const Color(0xffffffff),
@@ -167,7 +169,7 @@ class _mealState extends State<meal> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Breakfast()),
+                                      builder: (context) => Breakfast()),
                                 );
                               },
                               color: const Color(0xffffffff),

@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, depend_on_referenced_packages, non_constant_identifier_names
+
 import 'package:fitness/moduls/lineChart.dart';
 import 'package:fitness/moduls/pie_graph.dart';
 import 'package:flutter/material.dart';
@@ -117,10 +119,10 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         Column(
-                          children: const [
+                          children: [
                             Text(
                               'Macro Balance',
                               style: TextStyle(
@@ -141,8 +143,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        const SizedBox(width: 130),
-                        const Text(
+                        SizedBox(width: 130),
+                        Text(
                           'Diet goal',
                           style: TextStyle(
                             color: Colors.white,
@@ -261,8 +263,8 @@ class _HomePageState extends State<HomePage> {
                     Center(
                       child: LineChartWidget(),
                     ),
-                    Row(
-                      children: const [
+                    const Row(
+                      children: [
                         SizedBox(width: 210),
                         Text(
                           'Log weight',

@@ -1,4 +1,5 @@
-import 'package:fitness/moduls/login/sign%20up/secreen_signup.dart';
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
@@ -10,7 +11,11 @@ class Authentification1 extends StatefulWidget {
   @override
   State<Authentification1> createState() => _Authentification1State();
   const Authentification1(
-      {required this.email, required this.pasword, required this.username});
+      {Key? key,
+      required this.email,
+      required this.pasword,
+      required this.username})
+      : super(key: key);
   final String email;
   final String pasword;
   final String username;

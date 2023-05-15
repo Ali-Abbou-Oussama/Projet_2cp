@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
@@ -51,8 +53,7 @@ class _homeviewState extends State<homeview> {
                     const SizedBox(height: 40),
                     Row(
                       children: [
-                        Container(
-                            child: Stack(
+                        Stack(
                           children: [
                             const SizedBox(width: 22),
                             const Positioned(
@@ -92,10 +93,9 @@ class _homeviewState extends State<homeview> {
                               ],
                             ),
                           ],
-                        )),
+                        ),
                         const SizedBox(width: 22),
-                        Container(
-                            child: Stack(
+                        Stack(
                           children: [
                             const Positioned(
                               top: 15,
@@ -133,7 +133,7 @@ class _homeviewState extends State<homeview> {
                               ],
                             ),
                           ],
-                        )),
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -141,8 +141,7 @@ class _homeviewState extends State<homeview> {
                     ),
                     Row(
                       children: [
-                        Container(
-                            child: Stack(
+                        Stack(
                           children: [
                             const SizedBox(width: 22),
                             const Positioned(
@@ -178,10 +177,9 @@ class _homeviewState extends State<homeview> {
                               progressColors: const [Color(0xffd0fd3e)],
                             ),
                           ],
-                        )),
+                        ),
                         const SizedBox(width: 22),
-                        Container(
-                            child: Stack(
+                        Stack(
                           children: [
                             const Positioned(
                               top: 9,
@@ -216,10 +214,9 @@ class _homeviewState extends State<homeview> {
                               progressColors: const [Color(0xffff2424)],
                             ),
                           ],
-                        )),
+                        ),
                         const SizedBox(width: 22),
-                        Container(
-                            child: Stack(
+                        Stack(
                           children: [
                             const Positioned(
                               top: 9,
@@ -254,12 +251,12 @@ class _homeviewState extends State<homeview> {
                               progressColors: const [Color(0xffe79332)],
                             ),
                           ],
-                        ))
+                        )
                       ],
                     ),
                     const SizedBox(height: 30),
-                    Column(
-                      children: const [
+                    const Column(
+                      children: [
                         ListTile(
                           title: Text(
                             'Breakfast',

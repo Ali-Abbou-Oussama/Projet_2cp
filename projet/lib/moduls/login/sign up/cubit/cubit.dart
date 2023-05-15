@@ -1,9 +1,8 @@
-import 'package:bloc/bloc.dart';
+// ignore_for_file: body_might_complete_normally_catch_error, avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness/models/user_model.dart';
-import 'package:fitness/moduls/login/cubit/states.dart';
 import 'package:fitness/moduls/login/sign%20up/cubit/states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

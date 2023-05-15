@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, file_names
+
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -6,7 +8,6 @@ class LineChartWidget extends StatelessWidget {
 
   LineChartWidget({Key? key}) : super(key: key);
 
-  @override
   void initState() {
     _tooltipBehavior = TooltipBehavior(
         enable: true, borderWidth: 5, color: const Color(0xffec6666));

@@ -34,28 +34,31 @@ class _mealState extends State<meal> {
                         height: 100,
                       ),
                       Container(
-                        height: 38,
-                        width: 38,
+                        height: 32,
+                        width: 32,
                         decoration: BoxDecoration(
                             color: const Color(0xff1d1e1c),
                             borderRadius: BorderRadius.circular(50)),
-                        child: IconButton(
-                          icon: const Icon(Icons.arrow_back_ios),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Breakfast()),
-                            );
-                          },
-                          color: const Color(0xffffffff),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: IconButton(
+                            icon: const Icon(Icons.arrow_back_ios),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Breakfast()),
+                              );
+                            },
+                            color: const Color(0xffffffff),
+                          ),
                         ),
                       ),
                       const SizedBox(
                         width: 16,
                       ),
                       const Text(
-                        'create meal',
+                        'Create meal',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -76,7 +79,7 @@ class _mealState extends State<meal> {
                           color: const Color(0xff312E2E),
                           borderRadius: BorderRadius.circular(8)),
                       width: 350,
-                      height: 60,
+                      height: 61,
                       child: Row(
                         children: [
                           const Text(
@@ -125,7 +128,7 @@ class _mealState extends State<meal> {
                         color: const Color(0xff312E2E),
                         borderRadius: BorderRadius.circular(8)),
                     width: 350,
-                    height: 100,
+                    height: 103,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

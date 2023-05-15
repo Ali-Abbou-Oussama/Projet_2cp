@@ -249,11 +249,11 @@ class _signupViewState extends State<signupView> {
                               },
                               text: 'Sign in'),
                           const SizedBox(height: 8),
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
+                           Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Center(
                               child: Row(
-                                children: [
+                                children: const [
                                   SizedBox(
                                     width: 120,
                                     child: Divider(

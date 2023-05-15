@@ -247,11 +247,11 @@ class _loginViewState extends State<loginView1> {
                                   ),
                                 ],
                               ),
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
+                               Padding(
+                                padding: const EdgeInsets.all(8.0),
                                 child: Center(
                                   child: Row(
-                                    children: [
+                                    children: const [
                                       SizedBox(
                                         width: 140,
                                         child: Divider(

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fitness/moduls/Breakfast.dart';
 import 'package:flutter/material.dart';
+
+import 'moduls/profiles/profile.dart';
 
 // Importez le fichier contenant le widget `WeightChart`.
 
@@ -15,9 +16,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Breakfast(),
+      home: Scaffold(
+        body: profilescreen(),
+      ),
     );
   }
 }

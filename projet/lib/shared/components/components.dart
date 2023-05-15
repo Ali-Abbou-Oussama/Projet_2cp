@@ -162,3 +162,148 @@ Color chooseToastColor(ToasStates state) {
   }
   return color;
 }
+class CustomContainer extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
+  const CustomContainer(
+      {Key? key, required this.title, required this.subtitle}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 65,
+      width: 340,
+     
+      decoration: BoxDecoration(
+         color: const Color.fromARGB(255, 49, 46, 46),
+         borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+      BoxShadow(
+        color: const Color.fromARGB(255, 20, 20, 20).withOpacity(0.5),
+        spreadRadius: 5,
+        blurRadius: 7,
+        offset: const Offset(0, 3), // changes position of shadow
+      ),
+    ],),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 17, top: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+		fontSize: 19.245473861694336,
+		fontFamily: 'WorkSans',
+		fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(
+              height: 3,
+            ),
+            Text(
+              subtitle,
+              style: const TextStyle(
+              	color: Color(0xff929292),
+		fontSize: 10,
+		fontFamily: 'WorkSans',
+		fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+class CustomImageCard extends StatelessWidget {
+  final String imagePath;
+  final String title;
+  final String subtitle;
+
+  const CustomImageCard({
+    Key? key,
+    required this.imagePath,
+    required this.title,
+    required this.subtitle,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Container(
+        decoration: BoxDecoration(
+           boxShadow: [
+      BoxShadow(
+        color: const Color.fromARGB(255, 20, 20, 20).withOpacity(0.3),
+        spreadRadius: 5,
+        blurRadius: 7,
+        offset: const Offset(0, 2), // changes position of shadow
+      ),
+    ],
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              width: 230,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  topRight: Radius.circular(8),
+                ),
+                child: Image.asset(
+                  imagePath,
+                  width: 230,
+                  height: 111,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Container(
+              width: 230,
+              height: 50,
+              decoration: const BoxDecoration(
+                 color: Color.fromARGB(255, 49, 46, 46),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(8),
+                  bottomRight: Radius.circular(8),
+                ),
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(9),
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13.5,
+                        fontFamily: 'WorkSans',
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      subtitle,
+                      style: const TextStyle(
+                        color: Color(0xff929292),
+                        fontSize: 8.5,
+                        fontFamily: 'WorkSans',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

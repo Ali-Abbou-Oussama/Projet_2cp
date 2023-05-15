@@ -92,16 +92,19 @@ class _BreakfastState extends State<Breakfast> {
                       height: 100,
                     ),
                     Container(
-                      height: 38,
-                      width: 38,
+                      height: 32,
+                      width: 32,
                       decoration: BoxDecoration(
                           color: const Color(0xff1d1e1c),
                           borderRadius: BorderRadius.circular(50)),
                       child: GestureDetector(
-                        child: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Color(0xffffffff),
-                          weight: 2,
+                        child: const Align(
+                          alignment: Alignment.centerRight,
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: Color(0xffffffff),
+                            weight: 2,
+                          ),
                         ),
                         onTap: () {
                           Navigator.pop(context);

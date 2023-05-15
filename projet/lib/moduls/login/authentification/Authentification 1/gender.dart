@@ -1,13 +1,19 @@
+import 'package:fitness/moduls/login/sign%20up/secreen_signup.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 
-import '../../shared/components/components.dart';
+import '../../../../shared/components/components.dart';
 import '../Authentification2/weight.dart';
 
 class Authentification1 extends StatefulWidget {
   @override
   State<Authentification1> createState() => _Authentification1State();
+  const Authentification1(
+      {required this.email, required this.pasword, required this.username});
+  final String email;
+  final String pasword;
+  final String username;
 }
 
 bool ismale = false;
@@ -232,6 +238,9 @@ class _Authentification1State extends State<Authentification1> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Authentification2(
+                                    email: widget.email,
+                                    pasword: widget.pasword,
+                                    username: widget.username,
                                     age: _currentValue,
                                     ismale: ismale,
                                   ),

@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:numberpicker/numberpicker.dart';
 
 int _currentValue = 24;
@@ -61,7 +64,13 @@ Widget Field({
         keyboardType: type,
         controller: controller,
         decoration: InputDecoration(
-            border: OutlineInputBorder(),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.black, // Change border color here
+              ),
+              borderRadius: BorderRadius.circular(
+                  25), // Match container border radius here
+            ),
             labelText: text,
             hintStyle: TextStyle(
               color: textColor,
@@ -122,3 +131,35 @@ Widget vertslider({
         onChanged: changed(),
       ),
     );
+
+void showToast({
+  required String text,
+  required ToasStates state,
+}) =>
+    Fluttertoast.showToast(
+      msg: text,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 5,
+      backgroundColor: chooseToastColor(state),
+      textColor: Colors.white,
+      fontSize: 16,
+    );
+
+enum ToasStates { SUCCESS, EROOR, WARNING }
+
+Color chooseToastColor(ToasStates state) {
+  Color color;
+  switch (state) {
+    case ToasStates.SUCCESS:
+      color = Colors.green;
+      break;
+    case ToasStates.EROOR:
+      color = Colors.red;
+      break;
+    case ToasStates.WARNING:
+      color = Colors.amber;
+      break;
+  }
+  return color;
+}

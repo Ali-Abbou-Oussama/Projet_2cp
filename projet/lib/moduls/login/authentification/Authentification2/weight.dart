@@ -3,12 +3,19 @@ import 'package:numberpicker/numberpicker.dart';
 import 'package:page_view_indicators/circle_page_indicator.dart';
 import 'package:vertical_weight_slider/vertical_weight_slider.dart';
 
-import '../../shared/components/components.dart';
+import '../../../../shared/components/components.dart';
 import '../authentification3/goal.dart';
 
 class Authentification2 extends StatefulWidget {
-  const Authentification2({required this.ismale, required this.age});
-
+  const Authentification2(
+      {required this.ismale,
+      required this.age,
+      required this.email,
+      required this.pasword,
+      required this.username});
+  final String email;
+  final String pasword;
+  final String username;
   final bool ismale;
   final int age;
 
@@ -188,6 +195,11 @@ class _Authentification2State extends State<Authentification2> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => goal(
+                                  age: widget.age,
+                                  email: widget.email,
+                                  pasword: widget.pasword,
+                                  ismale: widget.ismale,
+                                  username: widget.username,
                                   weight: _weight,
                                   height: height,
                                 ),

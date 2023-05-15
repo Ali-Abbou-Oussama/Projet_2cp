@@ -48,8 +48,9 @@ android {
         applicationId "com.example.or"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 19
+        targetSdkVersion 30
+        multiDexEnabled true 
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
@@ -62,7 +63,6 @@ android {
         }
     }
 }
-
 flutter {
     source '../..'
 }

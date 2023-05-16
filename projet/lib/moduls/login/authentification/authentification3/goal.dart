@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../layout/getfit_layout.dart';
 import '../../../../shared/components/components.dart';
 import '../../sign up/cubit/cubit.dart';
 import '../../sign up/cubit/states.dart';
@@ -18,6 +19,7 @@ class goal extends StatefulWidget {
     required this.ismale,
     required this.pasword,
     required this.username,
+    required this.activitylevel,
   }) : super(key: key);
 
   final String email;
@@ -25,6 +27,7 @@ class goal extends StatefulWidget {
   final String username;
   final int age;
   final bool ismale;
+  final String activitylevel;
 
   final double weight;
   final int height;
@@ -46,10 +49,46 @@ class _goalState extends State<goal> {
       return 'Lose Weight';
     } else if (index == 1) {
       return 'Maintain Weight';
-    } else if (index == 1) {
+    } else if (index == 2) {
       return ' Gain Weight';
     }
     return '';
+  }
+
+  double bmi(
+      bool ismale, int height, double weight, int age, String activitylevel) {
+    double tmb;
+    if (ismale) {
+      tmb = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+    } else {
+      tmb = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+    }
+
+    if (activitylevel == 'Low activity') {
+      return tmb * 1.2;
+    } else if (activitylevel == 'Moderate activity') {
+      return tmb * 1.55;
+    } else if (activitylevel == 'High activity') {
+      return tmb * 1.725;
+    } else if (activitylevel == 'Very high activity') {
+      return tmb * 1.9;
+    } else {
+      return tmb * 1.55;
+    }
+  }
+
+  int calories(double bmi, String goal) {
+    int n;
+    if (goal == 'Lose Weight') {
+      n = (bmi - 500).toInt();
+    } else if (goal == 'Maintain Weight') {
+      n = bmi.toInt();
+    } else if (goal == 'Gain Weight') {
+      n = (bmi + 500).toInt();
+    } else {
+      n = n = bmi.toInt();
+    }
+    return n;
   }
 
   @override
@@ -124,6 +163,15 @@ class _goalState extends State<goal> {
                             size: 17,
                             right: () {
                               RegisterCubit.get(context).userRegister(
+                                  activitylevel: widget.activitylevel,
+                                  calories: calories(
+                                      bmi(
+                                          widget.ismale,
+                                          widget.height,
+                                          widget.weight,
+                                          widget.age,
+                                          widget.activitylevel),
+                                      goal(_selectedButtonIndex)),
                                   height: widget.height,
                                   gender: widget.ismale ? 'Male' : 'FEMALE',
                                   username: widget.username,
@@ -132,6 +180,10 @@ class _goalState extends State<goal> {
                                   age: widget.age,
                                   goal: goal(_selectedButtonIndex),
                                   weight: widget.weight);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MyWidget()));
                             },
                             text: 'Next',
                             rad: 48,

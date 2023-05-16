@@ -9,6 +9,8 @@ class userModel {
   String goal;
   int height;
   String gender;
+  String activityLevel;
+  int calories;
 
   userModel({
     required this.email,
@@ -19,6 +21,8 @@ class userModel {
     required this.goal,
     required this.height,
     required this.gender,
+    required this.activityLevel,
+    required this.calories,
   });
 
   userModel.fromJson(Map<String, dynamic> json)
@@ -29,7 +33,10 @@ class userModel {
         weight = json['weight'],
         goal = json['goal'],
         height = json['height'],
-        gender = json['gender'];
+        gender = json['gender'],
+        activityLevel = json['activityLevel'],
+        calories = json['calories'];
+
   Map<String, dynamic> toMap() {
     return {
       'userName': userName,
@@ -40,6 +47,8 @@ class userModel {
       'goal': goal,
       'height': height,
       'gender': gender,
+      'activityLevel': activityLevel,
+      'calories': calories,
     };
   }
 }

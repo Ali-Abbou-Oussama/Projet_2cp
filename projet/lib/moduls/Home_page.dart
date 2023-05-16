@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Row(
+                    Row(
                       children: [
                         Column(
                           children: [
@@ -263,7 +263,7 @@ class _HomePageState extends State<HomePage> {
                     Center(
                       child: LineChartWidget(),
                     ),
-                     Row(
+                    Row(
                       children: [
                         SizedBox(width: 210),
                         Text(

@@ -9,17 +9,20 @@ import '../../../../shared/components/components.dart';
 import '../authentification3/goal.dart';
 
 class Authentification2 extends StatefulWidget {
-  const Authentification2(
-      {Key? key,
-      required this.ismale,
-      required this.age,
-      required this.email,
-      required this.pasword,
-      required this.username})
-      : super(key: key);
+  const Authentification2({
+    Key? key,
+    required this.ismale,
+    required this.age,
+    required this.email,
+    required this.pasword,
+    required this.username,
+    required this.activitylevel,
+  }) : super(key: key);
+
   final String email;
   final String pasword;
   final String username;
+  final String activitylevel;
   final bool ismale;
   final int age;
 
@@ -206,6 +209,7 @@ class _Authentification2State extends State<Authentification2> {
                                   username: widget.username,
                                   weight: _weight,
                                   height: height,
+                                  activitylevel: widget.activitylevel,
                                 ),
                               ));
                         },

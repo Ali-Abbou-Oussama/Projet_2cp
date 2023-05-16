@@ -20,6 +20,8 @@ class RegisterCubit extends Cubit<GetfitRegisterStates> {
     required String goal,
     required String gender,
     required int height,
+    required int calories,
+    required String activitylevel,
   }) {
     emit(GetfitRegisterLoadingState());
 
@@ -37,6 +39,8 @@ class RegisterCubit extends Cubit<GetfitRegisterStates> {
                 username: username,
                 email: email,
                 uId: value.user!.uid,
+                activitylevel: activitylevel,
+                calories: calories,
               ),
             })
         .catchError((error) {
@@ -44,15 +48,18 @@ class RegisterCubit extends Cubit<GetfitRegisterStates> {
     });
   }
 
-  void userCreate(
-      {required String username,
-      required String email,
-      required String uId,
-      required String goal,
-      required int age,
-      required double weight,
-      required int height,
-      required String gender}) {
+  void userCreate({
+    required String username,
+    required String email,
+    required String uId,
+    required String goal,
+    required int age,
+    required double weight,
+    required int height,
+    required String gender,
+    required String activitylevel,
+    required int calories,
+  }) {
     userModel model = userModel(
       gender: gender,
       height: height,
@@ -62,6 +69,8 @@ class RegisterCubit extends Cubit<GetfitRegisterStates> {
       goal: goal,
       age: age,
       weight: weight,
+      activityLevel: activitylevel,
+      calories: calories,
     );
     FirebaseFirestore.instance
         .collection('users')

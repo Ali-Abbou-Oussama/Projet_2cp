@@ -221,6 +221,8 @@ class _Authentification1State extends State<Authentification1> {
                         onChanged: ((value) {
                           setState(() {
                             _activityLevel = value;
+                            _activityLevelString =
+                                getActivityLevelString(_activityLevel);
                           });
                         }),
                       ),
@@ -248,6 +250,7 @@ class _Authentification1State extends State<Authentification1> {
                                     username: widget.username,
                                     age: _currentValue,
                                     ismale: ismale,
+                                    activitylevel: _activityLevelString,
                                   ),
                                 ));
                           },

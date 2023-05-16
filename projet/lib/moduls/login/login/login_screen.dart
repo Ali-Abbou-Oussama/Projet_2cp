@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types
 
+import 'package:fitness/layout/getfit_layout.dart';
 import 'package:fitness/moduls/login/cubit/cubit.dart';
 import 'package:fitness/moduls/login/cubit/states.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,9 @@ class _loginViewState extends State<loginView1> {
                 text: state.error,
                 state: ToasStates.EROOR,
               );
+            } else if (state is GetfitLoginSuccessState) {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => MyWidget()));
             }
           }),
           builder: (context, state) {
@@ -247,7 +251,7 @@ class _loginViewState extends State<loginView1> {
                                   ),
                                 ],
                               ),
-                               Padding(
+                              Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Center(
                                   child: Row(

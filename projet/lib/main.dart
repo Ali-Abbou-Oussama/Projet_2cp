@@ -1,7 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 
-import 'moduls/profiles/profile.dart';
+import 'package:fitness/moduls/login/login/login_screen.dart';
+import 'package:fitness/moduls/secreen_home.dart';
+import 'package:fitness/shared/cubit/cubit.dart';
+import 'package:fitness/shared/cubit/states.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Importez le fichier contenant le widget `WeightChart`.
 
@@ -16,10 +21,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: profilescreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getFitCubit()..getUserData(),
+        ),
+      ],
+      child: BlocConsumer<getFitCubit, getFitStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: loginView1(),
+          );
+        },
       ),
     );
   }

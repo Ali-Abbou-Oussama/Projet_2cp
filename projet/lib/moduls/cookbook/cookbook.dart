@@ -12,15 +12,18 @@ class _cookbkState extends State<cookbk> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("images/Splash.png"), fit: BoxFit.cover)),
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("images/Splash.png"), fit: BoxFit.cover)),
+      child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.only(left: 17,),
+              padding: const EdgeInsets.only(
+                left: 17,
+              ),
               child: defaultText(
                   text: 'GetFit',
                   family: "Inter",
@@ -195,7 +198,7 @@ class _cookbkState extends State<cookbk> {
             )
           ],
         ),
-      );
-   
+      ),
+    );
   }
 }

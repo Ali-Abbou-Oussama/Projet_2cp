@@ -22,6 +22,8 @@ class RegisterCubit extends Cubit<GetfitRegisterStates> {
     required int height,
     required int calories,
     required String activitylevel,
+    required int remaining,
+    required int eaten,
   }) {
     emit(GetfitRegisterLoadingState());
 
@@ -41,6 +43,8 @@ class RegisterCubit extends Cubit<GetfitRegisterStates> {
                 uId: value.user!.uid,
                 activitylevel: activitylevel,
                 calories: calories,
+                remaining: remaining,
+                eaten: eaten,
               ),
             })
         .catchError((error) {
@@ -59,6 +63,8 @@ class RegisterCubit extends Cubit<GetfitRegisterStates> {
     required String gender,
     required String activitylevel,
     required int calories,
+    required int remaining,
+    required int eaten,
   }) {
     userModel model = userModel(
       gender: gender,
@@ -71,11 +77,13 @@ class RegisterCubit extends Cubit<GetfitRegisterStates> {
       weight: weight,
       activityLevel: activitylevel,
       calories: calories,
+      eaten: eaten,
+      remaining: remaining,
     );
     FirebaseFirestore.instance
         .collection('users')
         .doc(uId)
-        .set(model.toMap())
+        .set(model.toJson())
         .then((value) {
       emit(GetfitCreateUserSuccessState());
     }).catchError((error) {

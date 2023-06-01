@@ -32,7 +32,7 @@ class _ServingState extends State<Serving> {
                         borderRadius: BorderRadius.circular(8)),
                     width: 350,
                     height: 150,
-                    child:  Column(
+                    child:  const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(

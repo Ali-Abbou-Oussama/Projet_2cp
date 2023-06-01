@@ -5,14 +5,34 @@ import 'package:fitness/Khedma%20Abdou/AlimentsDesignWidgetDinner.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../moduls/Breakfast.dart';
+import '../moduls/Lunch.dart';
+import 'MealWidget.dart';
+
 class SearchScreenDinner extends StatefulWidget {
   List<Aliments?>? listAliments;
   double? caloriesAlreadyConsumed;
-  SearchScreenDinner({
-    Key? key,
-    this.caloriesAlreadyConsumed,
-    this.listAliments,
-  }) : super(key: key);
+  late List<Aliments?>? listAlimentsLunch;
+  late double? caloriesConsumedLunch;
+  late List<Aliments?>? listAlimentsBreakfast;
+  late double? caloriesConsumedBreakfast;
+  double? caloriesAjoute;
+  late Breakfast? screenBreakfast;
+  late Lunch? screenLunch;
+  List<MealWidget>? listeMeal;
+  SearchScreenDinner(
+      {Key? key,
+      this.caloriesAlreadyConsumed,
+      this.listAliments,
+      this.caloriesConsumedBreakfast,
+      this.caloriesConsumedLunch,
+      this.listAlimentsBreakfast,
+      this.listAlimentsLunch,
+      this.caloriesAjoute,
+      required this.listeMeal,
+      required this.screenBreakfast,
+      required this.screenLunch})
+      : super(key: key);
 
   @override
   State<SearchScreenDinner> createState() => _SearchScreenDinnerState();
@@ -45,8 +65,8 @@ class _SearchScreenDinnerState extends State<SearchScreenDinner> {
       } else {
         postDocumentsList = FirebaseFirestore.instance
             .collection("Aliments")
-            .where("name", isGreaterThanOrEqualTo: textEntered)
-            .where("name", isLessThanOrEqualTo: '$textEntered\uf8ff')
+            .where("normalizedText", isGreaterThanOrEqualTo: textEntered)
+            .where("normalizedText", isLessThanOrEqualTo: '$textEntered\uf8ff')
             .get();
       }
     });
@@ -111,28 +131,46 @@ class _SearchScreenDinnerState extends State<SearchScreenDinner> {
             ),
           ),
         ),
-        body: FutureBuilder<QuerySnapshot>(
-          future: postDocumentsList,
-          builder: (context, snapshot) {
-            return snapshot.hasData
-                ? ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      Aliments model = Aliments.fromJson(
-                          snapshot.data!.docs[index].data()!
-                              as Map<String, dynamic>);
-                      return AlimentsDesignWidgetDinner(
-                        listAliments: widget.listAliments,
-                        model: model,
-                        context: context,
-                        caloriesAlreadyConsumed: widget.caloriesAlreadyConsumed,
-                      );
-                    })
-                : const Center(
-                    child: Text(
-                        "Pas d'aliments qui correspondent à votre recherche"),
-                  );
-          },
+        body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("images/back.png"), fit: BoxFit.cover),
+          ),
+          child: FutureBuilder<QuerySnapshot>(
+            future: postDocumentsList,
+            builder: (context, snapshot) {
+              return snapshot.hasData
+                  ? ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        Aliments model = Aliments.fromJson(
+                            snapshot.data!.docs[index].data()!
+                                as Map<String, dynamic>);
+                        return AlimentsDesignWidgetDinner(
+                          listeMeal: widget.listeMeal,
+                          screenBreakfast: widget.screenBreakfast,
+                          screenLunch: widget.screenLunch,
+                          caloriesAjoute: widget.caloriesAjoute,
+                          listAliments: widget.listAliments,
+                          model: model,
+                          context: context,
+                          caloriesAlreadyConsumed:
+                              widget.caloriesAlreadyConsumed,
+                          caloriesConsumedBreakfast:
+                              widget.caloriesConsumedBreakfast,
+                          caloriesConsumedLunch: widget.caloriesConsumedLunch,
+                          listAlimentsBreakfast: widget.listAlimentsBreakfast,
+                          listAlimentsLunch: widget.listAlimentsLunch,
+                        );
+                      })
+                  : const Center(
+                      child: Text(
+                          "Pas d'aliments qui correspondent à votre recherche"),
+                    );
+            },
+          ),
         ),
       ),
     );

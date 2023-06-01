@@ -1,18 +1,45 @@
 // ignore_for_file: file_names, must_be_immutable
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness/Khedma%20Abdou/Aliments.dart';
 import 'package:fitness/Khedma%20Abdou/AlimentsInfoWidget.dart';
 import 'package:fitness/Khedma%20Abdou/SearchScreenBreakfast.dart';
+import 'package:fitness/layout/getfit_layout.dart';
+import 'package:fitness/moduls/Dinner.dart';
+import 'package:fitness/moduls/Lunch.dart';
 import 'package:fitness/moduls/meal.dart';
+import 'package:fitness/shared/cubit/cubit.dart';
+import 'package:fitness/shared/cubit/states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fitness/Khedma Abdou/MealWidget.dart';
 
 class Breakfast extends StatefulWidget {
-  List<Aliments?>? listAliments;
-  double caloriesConsumed;
-  Breakfast(
-      {Key? key, this.caloriesConsumed = 0.0, List<Aliments?>? listAliments})
-      : listAliments = listAliments ?? [],
+  late List<MealWidget>? listeMeal;
+  late List<Aliments?>? listAlimentsBreakfast;
+  late double? caloriesConsumedBreakfast;
+  late List<Aliments?>? listAlimentsLunch;
+  late double? caloriesConsumedLunch;
+  late List<Aliments?>? listAlimentsDinner;
+  late double? caloriesConsumedDinner;
+  double? caloriesAjoute;
+  String name;
+  late Dinner? screenDinner;
+  late Lunch? screenLunch;
+  Breakfast({
+    Key? key,
+    required this.screenLunch,
+    required this.screenDinner,
+    this.caloriesConsumedBreakfast = 0.0,
+    List<Aliments?>? listAliments,
+    this.caloriesConsumedDinner,
+    this.caloriesConsumedLunch,
+    this.listAlimentsDinner,
+    this.listAlimentsLunch,
+    this.caloriesAjoute = 0.0,
+    this.name = "Breakfast",
+    List<MealWidget>? listeMeal,
+  })  : listAlimentsBreakfast = listAliments ?? [],
+        listeMeal = listeMeal ?? [],
         super(key: key);
 
   @override
@@ -42,8 +69,16 @@ class _BreakfastState extends State<Breakfast> {
       context,
       MaterialPageRoute(
           builder: (context) => SearchScreenBreakfast(
-                caloriesAlreadyConsumed: widget.caloriesConsumed,
-                listAliments: widget.listAliments,
+                listeMeal: widget.listeMeal,
+                screenDinner: widget.screenDinner,
+                screenLunch: widget.screenLunch,
+                caloriesAjoute: widget.caloriesAjoute,
+                caloriesAlreadyConsumed: widget.caloriesConsumedBreakfast,
+                listAliments: widget.listAlimentsBreakfast,
+                caloriesConsumedDinner: widget.caloriesConsumedDinner,
+                caloriesConsumedLunch: widget.caloriesConsumedLunch,
+                listAlimentsDinner: widget.listAlimentsDinner,
+                listAlimentsLunch: widget.listAlimentsLunch,
               )),
     );
   }
@@ -73,9 +108,11 @@ class _BreakfastState extends State<Breakfast> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
+    return BlocConsumer<getFitCubit, getFitStates>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        int remaining = getFitCubit.get(context).calories;
+        return Scaffold(
           body: Container(
             width: double.infinity,
             height: double.infinity,
@@ -92,22 +129,41 @@ class _BreakfastState extends State<Breakfast> {
                       height: 100,
                     ),
                     Container(
-                      height: 32,
-                      width: 32,
+                      height: 38,
+                      width: 38,
                       decoration: BoxDecoration(
                           color: const Color(0xff1d1e1c),
                           borderRadius: BorderRadius.circular(50)),
                       child: GestureDetector(
-                        child: const Align(
-                          alignment: Alignment.centerRight,
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            color: Color(0xffffffff),
-                            weight: 2,
-                          ),
+                        child: const Icon(
+                          Icons.arrow_back_ios,
+                          color: Color(0xffffffff),
+                          weight: 2,
                         ),
                         onTap: () {
-                          Navigator.pop(context);
+                          getFitCubit.get(context).updateCalories(
+                              calori:
+                                  remaining - widget.caloriesAjoute!.toInt());
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyWidget(
+                                        screenLunch: widget.screenLunch,
+                                        screenDinner: widget.screenDinner,
+                                        screenBreakfast: widget,
+                                        caloriesConsumedBreakfast:
+                                            widget.caloriesConsumedBreakfast!,
+                                        listAlimentsBreakfast:
+                                            widget.listAlimentsBreakfast,
+                                        caloriesConsumedDinner:
+                                            widget.caloriesConsumedDinner,
+                                        caloriesConsumedLunch:
+                                            widget.caloriesConsumedLunch,
+                                        listAlimentsDinner:
+                                            widget.listAlimentsDinner,
+                                        listAlimentsLunch:
+                                            widget.listAlimentsLunch,
+                                      )));
                         },
                       ),
                     ),
@@ -127,7 +183,6 @@ class _BreakfastState extends State<Breakfast> {
                   ],
                 ),
               ),
-              Text("calories consumed : ${widget.caloriesConsumed}"),
               Container(
                 padding: const EdgeInsets.only(left: 20),
                 width: 355,
@@ -180,14 +235,13 @@ class _BreakfastState extends State<Breakfast> {
                           style: TextStyle(
                             letterSpacing: 2,
                             fontSize: 18,
-                            decoration: TextDecoration.underline,
                             decorationColor: _underlineColor1,
                             fontWeight: FontWeight.w500,
                             color: _textColor1,
                           ),
                         )),
                     const SizedBox(
-                      width: 60,
+                      width: 100,
                     ),
                     Column(
                       children: [
@@ -198,7 +252,6 @@ class _BreakfastState extends State<Breakfast> {
                               style: TextStyle(
                                 letterSpacing: 2,
                                 fontSize: 18,
-                                decoration: TextDecoration.underline,
                                 decorationColor: _underlineColor2,
                                 fontWeight: FontWeight.w500,
                                 color: _textColor2,
@@ -219,64 +272,170 @@ class _BreakfastState extends State<Breakfast> {
                 ),
               ),
               _isVisible
-                  ? Column(
-                      children: [
-                        Row(
-                          children: [
-                            const SizedBox(height: 90),
-                            const SizedBox(width: 30),
-                            const Text(
-                              'Meals ',
-                              style: TextStyle(
-                                color: Colors.white,
-                                letterSpacing: 2,
-                                fontSize: 25,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(width: 120),
-                            GestureDetector(
-                              child: Text(
-                                'Create Meal +',
+                  ? Flexible(
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              const SizedBox(height: 90),
+                              const SizedBox(width: 30),
+                              const Text(
+                                'Meals ',
                                 style: TextStyle(
-                                  color: _isTapped
-                                      ? const Color(0xffD0FD3E)
-                                      : Colors.white,
+                                  color: Colors.white,
                                   letterSpacing: 2,
-                                  fontSize: 19,
+                                  fontSize: 25,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
-                              onTap: () {
-                                setState(() {
-                                  _isTapped = true;
-                                });
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const meal()),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
+                              const SizedBox(width: 80),
+                              GestureDetector(
+                                child: Text(
+                                  'Create Meal +',
+                                  style: TextStyle(
+                                    color: _isTapped
+                                        ? const Color(0xffD0FD3E)
+                                        : Colors.white,
+                                    letterSpacing: 2,
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    _isTapped = true;
+                                  });
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => meal(
+                                              calories: 0,
+                                              screenLunch: widget.screenLunch,
+                                              screenBreakfast: widget,
+                                              screenDinner: widget.screenDinner,
+                                              listeMeal: widget.listeMeal,
+                                              name: widget.name,
+                                              caloriesAjoute:
+                                                  widget.caloriesAjoute,
+                                              caloriesConsumedBreakfast: widget
+                                                  .caloriesConsumedBreakfast,
+                                              caloriesConsumedDinner:
+                                                  widget.caloriesConsumedDinner,
+                                              caloriesConsumedLunch:
+                                                  widget.caloriesConsumedLunch,
+                                              listAlimentsBreakfast:
+                                                  widget.listAlimentsBreakfast,
+                                              listAlimentsDinner:
+                                                  widget.listAlimentsDinner,
+                                              listAlimentsLunch:
+                                                  widget.listAlimentsLunch,
+                                              lastCalories: 0,
+                                            )),
+                                  );
+                                  setState(() {
+                                    _isTapped = false;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                          widget.listeMeal != null ||
+                                  widget.listeMeal!.isNotEmpty
+                              ? Expanded(
+                                  child: ListView.builder(
+                                      itemCount: widget.listeMeal!.length,
+                                      itemBuilder: (context, index) {
+                                        MealWidget meal =
+                                            widget.listeMeal![index];
+                                        return GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              widget.caloriesAjoute =
+                                                  widget.caloriesAjoute! +
+                                                      meal.calories!;
+                                              widget.caloriesConsumedBreakfast =
+                                                  widget.caloriesConsumedBreakfast! +
+                                                      meal.calories!;
+                                            });
+                                          },
+                                          child: MealWidget(
+                                            name: meal.name,
+                                            calories: meal.calories,
+                                          ),
+                                        );
+                                      }),
+                                )
+                              : Container()
+                        ],
+                      ),
                     )
-                  : widget.listAliments == null || widget.listAliments!.isEmpty
-                      ? const Center(
-                          child: Text("Vous n'avez encore rien consommé"),
+                  : widget.listAlimentsBreakfast == null ||
+                          widget.listAlimentsBreakfast!.isEmpty
+                      ? const Expanded(
+                          flex: 1,
+                          child: Center(
+                            child: Text(
+                              "Vous n'avez encore rien consommé",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         )
                       : Expanded(
-                          flex: 1,
                           child: ListView.builder(
-                              itemCount: widget.listAliments!.length,
+                              itemCount: widget.listAlimentsBreakfast!.length,
                               itemBuilder: (context, index) {
-                                Aliments? model = widget.listAliments![index];
-                                return AlimentsInfoWidget(aliment: model!);
+                                Aliments? model =
+                                    widget.listAlimentsBreakfast![index];
+                                return AlimentsInfoWidget(model: model!);
                               }),
-                        )
+                        ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 70,
+                margin: const EdgeInsets.only(
+                  left: 12,
+                  right: 12,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xffb5d05b),
+                  border: Border.all(
+                    color: const Color(0xff393737),
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(50),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x3f000000),
+                      offset: Offset(0, 4),
+                      blurRadius: 4,
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    'Calories consumed: ${widget.caloriesConsumedBreakfast}',
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                      fontFamily: 'Castoro',
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              )
             ]),
           ),
-        ));
+        );
+      },
+    );
   }
 }

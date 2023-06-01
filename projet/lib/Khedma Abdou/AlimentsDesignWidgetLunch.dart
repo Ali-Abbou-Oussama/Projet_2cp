@@ -1,20 +1,41 @@
-// ignore_for_file: must_be_immutable, file_names, avoid_print
+// ignore_for_file: must_be_immutable, file_names, avoid_print, depend_on_referenced_packages
 
 import 'package:fitness/Khedma%20Abdou/Aliments.dart';
 import 'package:fitness/moduls/Lunch.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../moduls/Breakfast.dart';
+import '../moduls/Dinner.dart';
+import 'MealWidget.dart';
 
 class AlimentsDesignWidgetLunch extends StatefulWidget {
   Aliments? model;
   List<Aliments?>? listAliments;
   BuildContext? context;
   double? caloriesAlreadyConsumed;
+  late List<Aliments?>? listAlimentsBreakfast;
+  late double? caloriesConsumedBreakfast;
+  late List<Aliments?>? listAlimentsDinner;
+  late double? caloriesConsumedDinner;
+  double? caloriesAjoute;
+  late Breakfast? screenBreakfast;
+  late Dinner? screenDinner;
+  List<MealWidget>? listeMeal;
   AlimentsDesignWidgetLunch(
       {Key? key,
       this.model,
       this.listAliments,
       this.context,
-      this.caloriesAlreadyConsumed})
+      this.caloriesAlreadyConsumed,
+      this.caloriesConsumedDinner,
+      this.caloriesConsumedBreakfast,
+      this.listAlimentsDinner,
+      this.listAlimentsBreakfast,
+      this.caloriesAjoute,
+      required this.listeMeal,
+      required this.screenBreakfast,
+      required this.screenDinner})
       : super(key: key);
 
   @override
@@ -23,6 +44,7 @@ class AlimentsDesignWidgetLunch extends StatefulWidget {
 }
 
 class _AlimentsDesignWidgetLunchState extends State<AlimentsDesignWidgetLunch> {
+  NumberFormat formatter = NumberFormat('00.00');
   void _showBottomSheet() {
     double? gramsConsumed = 0.0;
     double? caloriesConsumed = 0.0;
@@ -30,14 +52,54 @@ class _AlimentsDesignWidgetLunchState extends State<AlimentsDesignWidgetLunch> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: const EdgeInsets.all(16),
+          width: double.infinity,
+          height: 431,
+          decoration: const BoxDecoration(
+              color: Color(0xff424040),
+              image: DecorationImage(
+                  image: AssetImage("images/back.png"), fit: BoxFit.cover)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Food Details: ${widget.model!.name}'),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text(
+                    'Food name :',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    '  ${widget.model!.name!}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w500,
+                    ),
+                  )
+                ],
+              ),
               const SizedBox(height: 16),
-              const Text('Enter the number of grams consumed:'),
-              const SizedBox(height: 8),
+              const Row(children: [
+                SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  'Enter the number of grams consumed :',
+                  style: TextStyle(color: Color(0xccffffff), fontSize: 16),
+                ),
+                SizedBox(
+                  width: 15,
+                )
+              ]),
+              const SizedBox(height: 25),
               TextField(
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
@@ -46,28 +108,78 @@ class _AlimentsDesignWidgetLunchState extends State<AlimentsDesignWidgetLunch> {
                     gramsConsumed = double.tryParse(value) ?? 0.0;
                   });
                 },
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'Grams',
+                  hintStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 19,
+                      letterSpacing: 2,
+                      fontWeight: FontWeight.w700),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25),
+                    borderSide: BorderSide.none,
+                  ),
+                  filled: true,
+                  fillColor: const Color(0xff6c6c6b),
                 ),
               ),
               const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {
-                  caloriesConsumed =
-                      (gramsConsumed! * widget.model!.calories!) / 100;
-                  widget.listAliments!.add(widget.model);
-                  Navigator.pop(context);
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Lunch(
-                              listAliments: widget.listAliments,
-                              caloriesConsumed: caloriesConsumed! +
-                                  widget.caloriesAlreadyConsumed!,
-                            )),
-                  );
-                },
-                child: const Text('Save'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      caloriesConsumed =
+                          (gramsConsumed! * widget.model!.calories!) / 100;
+                      widget.listAliments!.add(widget.model);
+                      Navigator.pop(context);
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Lunch(
+                                  listeMeal: widget.listeMeal,
+                                  screenBreakfast: widget.screenBreakfast,
+                                  screenDinner: widget.screenDinner,
+                                  caloriesAjoute: widget.caloriesAjoute! +
+                                      caloriesConsumed!,
+                                  listAliments: widget.listAliments,
+                                  caloriesConsumedLunch: caloriesConsumed! +
+                                      widget.caloriesAlreadyConsumed!,
+                                  caloriesConsumedDinner:
+                                      widget.caloriesConsumedDinner,
+                                  caloriesConsumedBreakfast:
+                                      widget.caloriesConsumedBreakfast,
+                                  listAlimentsDinner: widget.listAlimentsDinner,
+                                  listAlimentsBreakfast:
+                                      widget.listAlimentsBreakfast,
+                                )),
+                      );
+                    },
+                    child: const Text(" Save",
+                        style: TextStyle(
+                            color: Color(0xffd0fd3e),
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "WorkSans",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 17.0),
+                        textAlign: TextAlign.left),
+                  ),
+                  const SizedBox(width: 10),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(" Cancel",
+                        style: TextStyle(
+                            color: Color(0xffd0fd3e),
+                            fontWeight: FontWeight.w500,
+                            fontFamily: "WorkSans",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 17.0),
+                        textAlign: TextAlign.left),
+                  ),
+                  const SizedBox(width: 10),
+                ],
               ),
             ],
           ),
@@ -82,29 +194,149 @@ class _AlimentsDesignWidgetLunchState extends State<AlimentsDesignWidgetLunch> {
       onTap: () {
         _showBottomSheet();
       },
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: SizedBox(
-            height: 240,
-            width: MediaQuery.of(context).size.width,
-            child: Column(
+      child: Padding(
+        padding: const EdgeInsetsDirectional.only(start: 16, top: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              widget.model!.name!,
+              style: const TextStyle(
+                  color: Color(0xffffffff),
+                  fontWeight: FontWeight.w600,
+                  fontFamily: "OpenSans",
+                  fontStyle: FontStyle.normal,
+                  fontSize: 17.0),
+            ),
+            Text("${widget.model!.calories!} Cal/100g",
+                style: const TextStyle(
+                    color: Color(0x80ffffff),
+                    fontWeight: FontWeight.w500,
+                    fontFamily: "WorkSans",
+                    fontStyle: FontStyle.normal,
+                    fontSize: 12.0),
+                textAlign: TextAlign.left),
+            const SizedBox(
+              height: 5,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  backgroundColor: Colors.amberAccent,
-                  minRadius: 90,
+                SizedBox(
+                  height: 7,
+                  width: 5,
                   child: CircleAvatar(
-                    radius: 80,
-                    backgroundImage: NetworkImage(widget.model!.imageurl!),
+                    backgroundColor: Colors.red,
+                  ),
+                ),
+                SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  'Protein',
+                  style: TextStyle(
+                    color: Color(0xfff04343),
+                    fontSize: 10,
+                    fontFamily: 'Castoro',
+                  ),
+                ),
+                SizedBox(
+                  width: 35,
+                ),
+                SizedBox(
+                  height: 7,
+                  width: 5,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.amber,
+                  ),
+                ),
+                SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  'Carbs',
+                  style: TextStyle(
+                    color: Colors.amber,
+                    fontSize: 10,
+                    fontFamily: 'Castoro',
+                  ),
+                ),
+                SizedBox(
+                  width: 35,
+                ),
+                SizedBox(
+                  height: 7,
+                  width: 5,
+                  child: CircleAvatar(
+                    backgroundColor: Color(0xffd6fd58),
+                  ),
+                ),
+                SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  'Fat',
+                  style: TextStyle(
+                    color: Color(0xffd6fd58),
+                    fontSize: 10,
+                    fontFamily: 'Castoro',
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Row(
+              children: [
+                Text(
+                  '${formatter.format(widget.model!.proteins!)} g',
+                  style: const TextStyle(
+                    color: Color(0xb2ffffff),
+                    fontSize: 10,
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  width: 43,
                 ),
-                Text(widget.model!.name!),
+                Text(
+                  '${formatter.format(widget.model!.carbohydrates!)} g',
+                  style: const TextStyle(
+                    color: Color(0xb2ffffff),
+                    fontSize: 10,
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(
+                  width: 43,
+                ),
+                Text(
+                  '${formatter.format(widget.model!.lipids!)} g',
+                  style: const TextStyle(
+                    color: Color(0xb2ffffff),
+                    fontSize: 10,
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ],
             ),
-          ),
+            const SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.only(end: 15),
+              child: Container(
+                height: 1,
+                width: double.infinity,
+                color: const Color(0xff5a5858),
+              ),
+            )
+          ],
         ),
       ),
     );

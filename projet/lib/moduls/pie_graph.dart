@@ -2,8 +2,8 @@ import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter/material.dart';
 
 Map<String, double> dataMap = {
-  'Protein': 45,
-  'Carbs': 30,
+  'Protein': 65,
+  'Carbs': 10,
   'Fat': 25,
 };
 List<Color> colorList = [

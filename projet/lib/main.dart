@@ -1,16 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
-
 import 'package:fitness/moduls/login/login/login_screen.dart';
-import 'package:fitness/moduls/secreen_home.dart';
+
 import 'package:fitness/shared/cubit/cubit.dart';
 import 'package:fitness/shared/cubit/states.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'Bloc-observer.dart';
+
 // Importez le fichier contenant le widget `WeightChart`.
 
 void main() async {
+  Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());

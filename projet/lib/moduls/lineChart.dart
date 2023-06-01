@@ -26,8 +26,8 @@ class LineChartWidget extends StatelessWidget {
         series: <LineSeries<SalesData, String>>[
           LineSeries<SalesData, String>(
               dataSource: <SalesData>[
-                SalesData('Mon', 70),
-                SalesData('Tue', 71),
+                SalesData('week1', 70),
+                SalesData('week2', 71),
                 SalesData('Wed', 74),
                 SalesData('Thu', 71),
                 SalesData('Fri', 73),

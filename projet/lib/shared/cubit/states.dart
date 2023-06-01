@@ -12,3 +12,8 @@ class getFitGetUserErrorState extends getFitStates {
 }
 
 class getFitChangeBottomNav extends getFitStates {}
+
+class getFitUserUpdateErrorState extends getFitStates {
+  final String error;
+  getFitUserUpdateErrorState(this.error);
+}

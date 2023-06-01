@@ -152,13 +152,8 @@ class _signupViewState extends State<signupView> {
                             type: TextInputType.emailAddress,
                           ),
                           const SizedBox(height: 15),
-                          Container(
-                            width: 370.5,
-                            height: 52.9,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(25),
-                            ),
+                          Padding(
+                            padding: const EdgeInsets.all(0),
                             child: TextFormField(
                               obscureText: ispassword,
                               validator: (value) {
@@ -170,6 +165,8 @@ class _signupViewState extends State<signupView> {
                               keyboardType: TextInputType.visiblePassword,
                               controller: passwordcontroller,
                               decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
                                 suffixIcon: IconButton(
                                   icon: Icon(
                                     ispassword
@@ -249,11 +246,11 @@ class _signupViewState extends State<signupView> {
                               },
                               text: 'Sign in'),
                           const SizedBox(height: 8),
-                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Center(
                               child: Row(
-                                children: const [
+                                children: [
                                   SizedBox(
                                     width: 120,
                                     child: Divider(

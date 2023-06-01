@@ -1,44 +1,53 @@
 // ignore_for_file: must_be_immutable, file_names
 
 import 'package:fitness/Khedma%20Abdou/Aliments.dart';
-import 'package:fitness/Khedma%20Abdou/AlimentsDesignWidgetLunch.dart';
+import 'package:fitness/Khedma%20Abdou/AlimentsMeal.dart';
+import 'package:fitness/moduls/Breakfast.dart';
 import 'package:fitness/moduls/Dinner.dart';
+import 'package:fitness/moduls/Lunch.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../moduls/Breakfast.dart';
 import 'MealWidget.dart';
 
-class SearchScreenLunch extends StatefulWidget {
-  List<Aliments?>? listAliments;
-  double? caloriesAlreadyConsumed;
-  late List<Aliments?>? listAlimentsBreakfast;
-  late double? caloriesConsumedBreakfast;
+class SearchMeal extends StatefulWidget {
+  List<Aliments?>? listAlimentsMeal;
+  List<MealWidget>? listeMeal;
+  List<Aliments?>? listAlimentsBreakfast;
+  double? caloriesConsumedBreakfast;
+  late List<Aliments?>? listAlimentsLunch;
+  late double? caloriesConsumedLunch;
   late List<Aliments?>? listAlimentsDinner;
   late double? caloriesConsumedDinner;
   double? caloriesAjoute;
-  late Breakfast? screenBreakfast;
-  late Dinner? screenDinner;
-  List<MealWidget>? listeMeal;
-  SearchScreenLunch(
+  String name;
+  Breakfast? screenBreakfast;
+  Lunch? screenLunch;
+  Dinner? screenDinner;
+  double? calories;
+  SearchMeal(
       {Key? key,
-      this.caloriesAlreadyConsumed,
-      this.listAliments,
-      this.caloriesConsumedDinner,
-      this.caloriesConsumedBreakfast,
-      this.listAlimentsDinner,
-      this.listAlimentsBreakfast,
-      this.caloriesAjoute,
+      required this.listAlimentsMeal,
       required this.listeMeal,
+      this.caloriesConsumedBreakfast,
+      this.listAlimentsBreakfast,
+      this.caloriesConsumedDinner,
+      this.caloriesConsumedLunch,
+      this.listAlimentsDinner,
+      this.listAlimentsLunch,
+      this.caloriesAjoute,
+      required this.name,
       required this.screenBreakfast,
-      required this.screenDinner})
+      required this.screenDinner,
+      required this.screenLunch,
+      required this.calories})
       : super(key: key);
 
   @override
-  State<SearchScreenLunch> createState() => _SearchScreenLunchState();
+  State<SearchMeal> createState() => _SearchMealState();
 }
 
-class _SearchScreenLunchState extends State<SearchScreenLunch> {
+class _SearchMealState extends State<SearchMeal> {
   Future<QuerySnapshot>? postDocumentsList;
   String alimentText = '';
   late FocusNode focusNode;
@@ -148,21 +157,24 @@ class _SearchScreenLunchState extends State<SearchScreenLunch> {
                         Aliments model = Aliments.fromJson(
                             snapshot.data!.docs[index].data()!
                                 as Map<String, dynamic>);
-                        return AlimentsDesignWidgetLunch(
+                        return AlimentsMeal(
+                          listAlimentsMeal: widget.listAlimentsMeal,
                           listeMeal: widget.listeMeal,
+                          calories: widget.calories,
                           screenBreakfast: widget.screenBreakfast,
                           screenDinner: widget.screenDinner,
+                          screenLunch: widget.screenLunch,
+                          name: widget.name,
                           caloriesAjoute: widget.caloriesAjoute,
-                          listAliments: widget.listAliments,
+                          listAlimentsBreakfast: widget.listAlimentsBreakfast,
                           model: model,
                           context: context,
-                          caloriesAlreadyConsumed:
-                              widget.caloriesAlreadyConsumed,
-                          caloriesConsumedDinner: widget.caloriesConsumedDinner,
                           caloriesConsumedBreakfast:
                               widget.caloriesConsumedBreakfast,
+                          caloriesConsumedDinner: widget.caloriesConsumedDinner,
+                          caloriesConsumedLunch: widget.caloriesConsumedLunch,
                           listAlimentsDinner: widget.listAlimentsDinner,
-                          listAlimentsBreakfast: widget.listAlimentsBreakfast,
+                          listAlimentsLunch: widget.listAlimentsLunch,
                         );
                       })
                   : const Center(

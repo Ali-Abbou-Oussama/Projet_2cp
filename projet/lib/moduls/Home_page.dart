@@ -16,8 +16,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<double> weeklySummary = [
-    0,
-    0,
+    1000,
+    1500,
     0,
     2240,
     0,
@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         Column(
                           children: [
@@ -263,7 +263,7 @@ class _HomePageState extends State<HomePage> {
                     Center(
                       child: LineChartWidget(),
                     ),
-                    Row(
+                    const Row(
                       children: [
                         SizedBox(width: 210),
                         Text(

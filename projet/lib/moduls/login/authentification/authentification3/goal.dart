@@ -1,10 +1,9 @@
 // ignore_for_file: camel_case_types
 
-import 'package:flutter/cupertino.dart';
+import 'package:fitness/moduls/login/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../layout/getfit_layout.dart';
 import '../../../../shared/components/components.dart';
 import '../../sign up/cubit/cubit.dart';
 import '../../sign up/cubit/states.dart';
@@ -173,6 +172,15 @@ class _goalState extends State<goal> {
                                           widget.activitylevel),
                                       goal(_selectedButtonIndex)),
                                   height: widget.height,
+                                  eaten: 0,
+                                  remaining: calories(
+                                      bmi(
+                                          widget.ismale,
+                                          widget.height,
+                                          widget.weight,
+                                          widget.age,
+                                          widget.activitylevel),
+                                      goal(_selectedButtonIndex)),
                                   gender: widget.ismale ? 'Male' : 'FEMALE',
                                   username: widget.username,
                                   email: widget.email,
@@ -183,7 +191,8 @@ class _goalState extends State<goal> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => MyWidget()));
+                                      builder: (context) =>
+                                          const loginView1()));
                             },
                             text: 'Next',
                             rad: 48,

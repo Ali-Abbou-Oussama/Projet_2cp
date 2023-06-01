@@ -3,20 +3,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeView5 extends StatelessWidget {
+  const HomeView5({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final example = ExampleClass();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Example App'),
+        title: const Text('Example App'),
       ),
       body: Center(
         child: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
           future: example.postDocumentsList,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
 
             if (snapshot.hasError) {
@@ -35,7 +37,7 @@ class HomeView5 extends StatelessWidget {
             }
 
             // No data yet
-            return Text('No data');
+            return const Text('No data');
           },
         ),
       ),

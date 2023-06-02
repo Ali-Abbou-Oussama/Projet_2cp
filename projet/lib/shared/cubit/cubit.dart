@@ -55,6 +55,9 @@ class getFitCubit extends Cubit<getFitStates> {
   userModel? model;
 
   int calories = 0;
+  int remaining = 0;
+  int eaten = 0;
+
   int age = 0;
   double weight = 20;
   String activityLevel = '';
@@ -74,6 +77,9 @@ class getFitCubit extends Cubit<getFitStates> {
 
       if (data != null) {
         calories = data['calories'] ?? 0;
+        remaining = data['remaining'] ?? 0;
+        eaten = data['eaten'] ?? 0;
+
         age = data['age'] ?? 0;
         print(age);
         weight = data['weight'] ?? 20.0;
@@ -258,7 +264,7 @@ class getFitCubit extends Cubit<getFitStates> {
   }
 
   void updateCalories({
-    required int calori,
+    required int remaining,
   }) {
     userModel usermodel = userModel(
       email: model!.email,
@@ -270,9 +276,9 @@ class getFitCubit extends Cubit<getFitStates> {
       age: model!.age,
       weight: model!.weight,
       activityLevel: model!.activityLevel,
-      calories: calori,
-      remaining: model!.remaining,
-      eaten: model!.eaten,
+      calories: model!.calories,
+      remaining: remaining,
+      eaten: model!.calories! - remaining,
     );
     FirebaseFirestore.instance
         .collection('users')
@@ -284,4 +290,32 @@ class getFitCubit extends Cubit<getFitStates> {
       emit(getFitUserUpdateErrorState(error.toString()));
     });
   }
+
+  // void updateEaten({
+  //   required int eaten,
+  // }) {
+  //   userModel usermodel = userModel(
+  //     email: model!.email,
+  //     gender: model!.gender,
+  //     uId: model!.uId,
+  //     userName: model!.userName,
+  //     height: model!.height,
+  //     goal: model!.goal,
+  //     age: model!.age,
+  //     weight: model!.weight,
+  //     activityLevel: model!.activityLevel,
+  //     calories: model!.calories,
+  //     remaining: calories - model!.eaten!,
+  //     eaten: eaten,
+  //   );
+  //   FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(uid)
+  //       .update(usermodel.toJson())
+  //       .then((value) {
+  //     getUserData();
+  //   }).catchError((error) {
+  //     emit(getFitUserUpdateErrorState(error.toString()));
+  //   });
+  // }
 }

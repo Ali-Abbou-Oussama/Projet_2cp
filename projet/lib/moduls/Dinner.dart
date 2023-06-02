@@ -108,334 +108,348 @@ class _DinnerState extends State<Dinner> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<getFitCubit, getFitStates>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        int remaining = getFitCubit.get(context).calories;
-        return Scaffold(
-          body: Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("images/back.png"), fit: BoxFit.cover)),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Padding(
-                padding: const EdgeInsets.all(24),
-                child: Row(
+    return BlocProvider(
+      create: (BuildContext context) => getFitCubit()..getUserData(),
+      child: BlocConsumer<getFitCubit, getFitStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          int remaining = getFitCubit.get(context).remaining!;
+          // int eaten = getFitCubit.get(context).eaten;
+          return Scaffold(
+            body: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("images/back.png"), fit: BoxFit.cover)),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    Container(
-                      height: 38,
-                      width: 38,
-                      decoration: BoxDecoration(
-                          color: const Color(0xff1d1e1c),
-                          borderRadius: BorderRadius.circular(50)),
-                      child: GestureDetector(
-                        child: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Color(0xffffffff),
-                          weight: 2,
-                        ),
-                        onTap: () {
-                          getFitCubit.get(context).updateCalories(
-                              calori:
-                                  remaining - widget.caloriesAjoute!.toInt());
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyWidget(
-                                        screenLunch: widget.screenLunch,
-                                        screenBreakfast: widget.screenBreakfast,
-                                        screenDinner: widget,
-                                        caloriesConsumedBreakfast:
-                                            widget.caloriesConsumedBreakfast,
-                                        listAlimentsBreakfast:
-                                            widget.listAlimentsBreakfast,
-                                        caloriesConsumedDinner:
-                                            widget.caloriesConsumedDinner,
-                                        caloriesConsumedLunch:
-                                            widget.caloriesConsumedLunch,
-                                        listAlimentsDinner:
-                                            widget.listAlimentsDinner,
-                                        listAlimentsLunch:
-                                            widget.listAlimentsLunch,
-                                      )));
-                        },
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    const Text(
-                      'Dinner',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        letterSpacing: 2,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Text("calories consumed : ${widget.caloriesConsumedDinner}"),
-              Container(
-                padding: const EdgeInsets.only(left: 20),
-                width: 355,
-                child: TextField(
-                  onTap: _ontap2,
-                  decoration: InputDecoration(
-                    hintText: 'Search for a food',
-                    hintStyle: const TextStyle(
-                        color: Color(0xff929292),
-                        fontSize: 19,
-                        letterSpacing: 2,
-                        fontWeight: FontWeight.w700),
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Container(
-                        width: 35,
-                        height: 35,
-                        decoration: const BoxDecoration(
-                          color: Color(0xffc3d292),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: IconButton(
-                            icon: const Icon(Icons.search),
-                            onPressed: () {
-                              initSearchingPost(alimentText);
-                            },
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: const Color(0xff424040),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 50.0, top: 20),
-                child: Row(
-                  children: [
-                    GestureDetector(
-                        onTap: _onTap1,
-                        child: Text(
-                          'Recent',
-                          style: TextStyle(
-                            letterSpacing: 2,
-                            fontSize: 18,
-                            decoration: TextDecoration.underline,
-                            decorationColor: _underlineColor1,
-                            fontWeight: FontWeight.w500,
-                            color: _textColor1,
-                          ),
-                        )),
-                    const SizedBox(
-                      width: 60,
-                    ),
-                    Column(
-                      children: [
-                        GestureDetector(
-                            onTap: _toggleVisibility,
-                            child: Text(
-                              'My food ',
-                              style: TextStyle(
-                                letterSpacing: 2,
-                                fontSize: 18,
-                                decoration: TextDecoration.underline,
-                                decorationColor: _underlineColor2,
-                                fontWeight: FontWeight.w500,
-                                color: _textColor2,
-                              ),
-                            )),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const Center(
-                child: SizedBox(
-                  width: 390,
-                  child: Divider(
-                    thickness: 1,
-                    color: Color(0x33ffffff),
-                  ),
-                ),
-              ),
-              _isVisible
-                  ? Flexible(
-                      child: Column(
+                    Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Row(
                         children: [
-                          Row(
-                            children: [
-                              const SizedBox(height: 90),
-                              const SizedBox(width: 30),
-                              const Text(
-                                'Meals ',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  letterSpacing: 2,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                          const SizedBox(
+                            height: 100,
+                          ),
+                          Container(
+                            height: 38,
+                            width: 38,
+                            decoration: BoxDecoration(
+                                color: const Color(0xff1d1e1c),
+                                borderRadius: BorderRadius.circular(50)),
+                            child: GestureDetector(
+                              child: const Icon(
+                                Icons.arrow_back_ios,
+                                color: Color(0xffffffff),
+                                weight: 2,
                               ),
-                              const SizedBox(width: 120),
-                              GestureDetector(
-                                child: Text(
-                                  'Create Meal +',
-                                  style: TextStyle(
-                                    color: _isTapped
-                                        ? const Color(0xffD0FD3E)
-                                        : Colors.white,
-                                    letterSpacing: 2,
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    _isTapped = true;
-                                  });
-                                  Navigator.push(
+                              onTap: () {
+                                getFitCubit.get(context).updateCalories(
+                                    remaining: remaining -
+                                        widget.caloriesAjoute!.toInt());
+
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => meal(
-                                            lastCalories: 0,
-                                            calories: 0,
-                                            screenLunch: widget.screenLunch,
-                                            screenDinner: widget,
-                                            screenBreakfast:
-                                                widget.screenBreakfast,
-                                            listeMeal: widget.listeMeal,
-                                            name: widget.name,
-                                            caloriesAjoute:
-                                                widget.caloriesAjoute,
-                                            caloriesConsumedBreakfast: widget
-                                                .caloriesConsumedBreakfast,
-                                            caloriesConsumedDinner:
-                                                widget.caloriesConsumedDinner,
-                                            caloriesConsumedLunch:
-                                                widget.caloriesConsumedLunch,
-                                            listAlimentsBreakfast:
-                                                widget.listAlimentsBreakfast,
-                                            listAlimentsDinner:
-                                                widget.listAlimentsDinner,
-                                            listAlimentsLunch:
-                                                widget.listAlimentsLunch)),
-                                  );
-                                },
-                              ),
-                            ],
+                                        builder: (context) => MyWidget(
+                                              screenLunch: widget.screenLunch,
+                                              screenBreakfast:
+                                                  widget.screenBreakfast,
+                                              screenDinner: widget,
+                                              caloriesConsumedBreakfast: widget
+                                                  .caloriesConsumedBreakfast,
+                                              listAlimentsBreakfast:
+                                                  widget.listAlimentsBreakfast,
+                                              caloriesConsumedDinner:
+                                                  widget.caloriesConsumedDinner,
+                                              caloriesConsumedLunch:
+                                                  widget.caloriesConsumedLunch,
+                                              listAlimentsDinner:
+                                                  widget.listAlimentsDinner,
+                                              listAlimentsLunch:
+                                                  widget.listAlimentsLunch,
+                                            )));
+                              },
+                            ),
                           ),
-                          widget.listeMeal != null ||
-                                  widget.listeMeal!.isNotEmpty
-                              ? Expanded(
-                                  child: ListView.builder(
-                                      itemCount: widget.listeMeal!.length,
-                                      itemBuilder: (context, index) {
-                                        MealWidget meal =
-                                            widget.listeMeal![index];
-                                        return GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              widget.caloriesAjoute =
-                                                  widget.caloriesAjoute! +
-                                                      meal.calories!;
-                                              widget.caloriesConsumedDinner =
-                                                  widget.caloriesConsumedDinner! +
-                                                      meal.calories!;
-                                            });
-                                          },
-                                          child: MealWidget(
-                                            name: meal.name,
-                                            calories: meal.calories,
-                                          ),
-                                        );
-                                      }),
-                                )
-                              : Container()
+                          const SizedBox(
+                            width: 16,
+                          ),
+                          const Text(
+                            'Dinner',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              letterSpacing: 2,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                         ],
                       ),
-                    )
-                  : widget.listAlimentsDinner == null ||
-                          widget.listAlimentsDinner!.isEmpty
-                      ? const Expanded(
-                          flex: 1,
-                          child: Center(
-                            child: Text(
-                              "Vous n'avez encore rien consommé",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(left: 20),
+                      width: 355,
+                      child: TextField(
+                        onTap: _ontap2,
+                        decoration: InputDecoration(
+                          hintText: 'Search for a food',
+                          hintStyle: const TextStyle(
+                              color: Color(0xff929292),
+                              fontSize: 19,
+                              letterSpacing: 2,
+                              fontWeight: FontWeight.w700),
+                          prefixIcon: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Container(
+                              width: 35,
+                              height: 35,
+                              decoration: const BoxDecoration(
+                                color: Color(0xffc3d292),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: IconButton(
+                                  icon: const Icon(Icons.search),
+                                  onPressed: () {
+                                    initSearchingPost(alimentText);
+                                  },
+                                  color: Colors.black,
+                                ),
                               ),
                             ),
                           ),
-                        )
-                      : Expanded(
-                          child: ListView.builder(
-                              itemCount: widget.listAlimentsDinner!.length,
-                              itemBuilder: (context, index) {
-                                Aliments? model =
-                                    widget.listAlimentsDinner![index];
-                                return AlimentsInfoWidget(model: model!);
-                              }),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide.none,
+                          ),
+                          filled: true,
+                          fillColor: const Color(0xff424040),
                         ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 70,
-                margin: const EdgeInsets.only(
-                  left: 12,
-                  right: 12,
-                ),
-                decoration: BoxDecoration(
-                  color: const Color(0xffb5d05b),
-                  border: Border.all(
-                    color: const Color(0xff393737),
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(50),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color(0x3f000000),
-                      offset: Offset(0, 4),
-                      blurRadius: 4,
-                      spreadRadius: 0,
+                      ),
                     ),
-                  ],
-                ),
-                child: Center(
-                  child: Text(
-                    'Calories consumed: ${widget.caloriesConsumedDinner}',
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
-                      fontFamily: 'Castoro',
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50.0, top: 20),
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                              onTap: _onTap1,
+                              child: Text(
+                                'Recent',
+                                style: TextStyle(
+                                  letterSpacing: 2,
+                                  fontSize: 18,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: _underlineColor1,
+                                  fontWeight: FontWeight.w500,
+                                  color: _textColor1,
+                                ),
+                              )),
+                          const SizedBox(
+                            width: 60,
+                          ),
+                          Column(
+                            children: [
+                              GestureDetector(
+                                  onTap: _toggleVisibility,
+                                  child: Text(
+                                    'My food ',
+                                    style: TextStyle(
+                                      letterSpacing: 2,
+                                      fontSize: 18,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: _underlineColor2,
+                                      fontWeight: FontWeight.w500,
+                                      color: _textColor2,
+                                    ),
+                                  )),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              )
-            ]),
-          ),
-        );
-      },
+                    const Center(
+                      child: SizedBox(
+                        width: 390,
+                        child: Divider(
+                          thickness: 1,
+                          color: Color(0x33ffffff),
+                        ),
+                      ),
+                    ),
+                    _isVisible
+                        ? Flexible(
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    const SizedBox(height: 90),
+                                    const SizedBox(width: 30),
+                                    const Text(
+                                      'Meals ',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        letterSpacing: 2,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 80),
+                                    GestureDetector(
+                                      child: Text(
+                                        'Create Meal +',
+                                        style: TextStyle(
+                                          color: _isTapped
+                                              ? const Color(0xffD0FD3E)
+                                              : Colors.white,
+                                          letterSpacing: 2,
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          _isTapped = true;
+                                        });
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => meal(
+                                                    calories: 0,
+                                                    screenLunch:
+                                                        widget.screenLunch,
+                                                    screenBreakfast:
+                                                        widget.screenBreakfast,
+                                                    screenDinner: widget,
+                                                    listeMeal: widget.listeMeal,
+                                                    name: widget.name,
+                                                    caloriesAjoute:
+                                                        widget.caloriesAjoute,
+                                                    caloriesConsumedBreakfast:
+                                                        widget
+                                                            .caloriesConsumedBreakfast,
+                                                    caloriesConsumedDinner: widget
+                                                        .caloriesConsumedDinner,
+                                                    caloriesConsumedLunch: widget
+                                                        .caloriesConsumedLunch,
+                                                    listAlimentsBreakfast: widget
+                                                        .listAlimentsBreakfast,
+                                                    listAlimentsDinner: widget
+                                                        .listAlimentsDinner,
+                                                    listAlimentsLunch: widget
+                                                        .listAlimentsLunch,
+                                                    lastCalories: 0,
+                                                  )),
+                                        );
+                                        setState(() {
+                                          _isTapped = false;
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                widget.listeMeal != null ||
+                                        widget.listeMeal!.isNotEmpty
+                                    ? Expanded(
+                                        child: ListView.builder(
+                                            itemCount: widget.listeMeal!.length,
+                                            itemBuilder: (context, index) {
+                                              MealWidget meal =
+                                                  widget.listeMeal![index];
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    widget.caloriesAjoute =
+                                                        widget.caloriesAjoute! +
+                                                            meal.calories!;
+                                                    widget.caloriesConsumedBreakfast =
+                                                        widget.caloriesConsumedBreakfast! +
+                                                            meal.calories!;
+                                                  });
+                                                },
+                                                child: MealWidget(
+                                                  name: meal.name,
+                                                  calories: meal.calories,
+                                                ),
+                                              );
+                                            }),
+                                      )
+                                    : Container()
+                              ],
+                            ),
+                          )
+                        : widget.listAlimentsDinner == null ||
+                                widget.listAlimentsDinner!.isEmpty
+                            ? const Expanded(
+                                flex: 1,
+                                child: Center(
+                                  child: Text(
+                                    "Vous n'avez encore rien consommé",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Expanded(
+                                child: ListView.builder(
+                                    itemCount:
+                                        widget.listAlimentsDinner!.length,
+                                    itemBuilder: (context, index) {
+                                      Aliments? model =
+                                          widget.listAlimentsDinner![index];
+                                      return AlimentsInfoWidget(model: model!);
+                                    }),
+                              ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      height: 70,
+                      margin: const EdgeInsets.only(
+                        left: 12,
+                        right: 12,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xffb5d05b),
+                        border: Border.all(
+                          color: const Color(0xff393737),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(50),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color(0x3f000000),
+                            offset: Offset(0, 4),
+                            blurRadius: 4,
+                            spreadRadius: 0,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Calories consumed: ${widget.caloriesConsumedDinner}',
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontFamily: 'Castoro',
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    )
+                  ]),
+            ),
+          );
+        },
+      ),
     );
   }
 }

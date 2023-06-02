@@ -57,7 +57,12 @@ class _homeviewState extends State<homeview> {
       child: BlocConsumer<getFitCubit, getFitStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          int? calories = getFitCubit.get(context).calories;
+          int remaining = getFitCubit.get(context).remaining;
+          int? eaten = getFitCubit.get(context).calories - remaining;
+          double porcentage =
+              (remaining * 100) / getFitCubit.get(context).calories;
+          print(porcentage);
+
           //  remaining = calories!;
           // double pourcentage = (remaining * 100 / calories);
 
@@ -119,14 +124,14 @@ class _homeviewState extends State<homeview> {
                                 ),
                               ),
                               SimpleCircularProgressBar(
-                                valueNotifier: ValueNotifier(100),
+                                valueNotifier: ValueNotifier(90),
                                 mergeMode: false,
                                 size: 155,
                                 animationDuration: 3,
                                 onGetText: (double value) {
-                                  return calories >= 0
+                                  return remaining >= 0
                                       ? Text(
-                                          '$calories',
+                                          '$remaining',
                                           style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 30,
@@ -175,11 +180,7 @@ class _homeviewState extends State<homeview> {
                                 animationDuration: 3,
                                 onGetText: (double value) {
                                   return Text(
-                                    (widget.caloriesConsumedBreakfast! +
-                                            widget.caloriesConsumedDinner! +
-                                            widget.caloriesConsumedLunch!)
-                                        .toInt()
-                                        .toString(),
+                                    eaten.toString(),
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
